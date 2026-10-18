@@ -1,7 +1,7 @@
 {
   "name": "QuillOffice",
   "description": "The Quill suite in one download: installers that set up QuillPen (documents), QuillGrid (spreadsheets), QuillPost (email) and QuillStage (presentations) together on Windows, macOS, Linux, Android, iOS and the web. Original, open-source, clean-room office apps with no missing commands.",
-  "homepage": "",
+  "homepage": "https://github.com/socrtwo/QuillOffice/releases/latest",
   "topics": [
     "office-suite",
     "quill-suite",

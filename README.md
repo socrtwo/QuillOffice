@@ -29,6 +29,8 @@ The release notes list the exact version of each app in the bundle, and `SHA256S
 
 Nothing is recompiled here; the apps' own CI builds and tests them. See [docs/BUILD.md](docs/BUILD.md) to build a bundle locally.
 
+The repository's description, homepage and topics live in [QuillOffice.meta.json](QuillOffice.meta.json); `bash scripts/set-repo-metadata.sh` applies them with the GitHub CLI (`--dry-run` prints the command).
+
 ## Known limits
 
 - The desktop apps are not code-signed, so Windows SmartScreen and macOS Gatekeeper ask once per app (the installers say so).

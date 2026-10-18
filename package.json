@@ -3,12 +3,45 @@
   "version": "0.1.0",
   "private": true,
   "description": "QuillOffice: the Quill suite (QuillPen, QuillGrid, QuillPost, QuillStage) in one download per platform.",
+  "keywords": [
+    "quilloffice",
+    "quill-suite",
+    "quillpen",
+    "quillgrid",
+    "quillpost",
+    "quillstage",
+    "office-suite",
+    "installer",
+    "bundle",
+    "setup",
+    "nsis",
+    "pkg",
+    "deb",
+    "appimage",
+    "apk",
+    "ipa",
+    "web",
+    "windows",
+    "macos",
+    "linux",
+    "android",
+    "ios"
+  ],
+  "homepage": "https://github.com/socrtwo/QuillOffice/releases/latest",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/socrtwo/QuillOffice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/socrtwo/QuillOffice/issues"
+  },
+  "author": "Paul D Pruitt",
   "license": "MIT",
   "type": "module",
   "engines": { "node": ">=22" },
   "scripts": {
     "manifest": "node scripts/resolve.mjs manifest --out manifest.json",
     "test": "node --test tests/*.test.mjs",
-    "check": "for f in scripts/*.mjs; do node --check \"$f\"; done && bash -n installers/windows/build.sh installers/macos/build-pkg.sh installers/linux/build.sh installers/linux/install-header.sh"
+    "check": "for f in scripts/*.mjs; do node --check \"$f\"; done && bash -n installers/windows/build.sh installers/macos/build-pkg.sh installers/linux/build.sh installers/linux/install-header.sh scripts/set-repo-metadata.sh"
   }
 }
