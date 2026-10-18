@@ -11,4 +11,6 @@ Changes to the installers should keep these rules:
 - An app that fails to install must not stop the others, and the failure must be reported.
 - Interface text and documentation use American English.
 
+The repository description and topics are kept in `QuillOffice.meta.json`; change them there and run `bash scripts/set-repo-metadata.sh` (needs `gh auth login`).
+
 Run `npm test` and `npm run check` before opening a pull request. The CI workflow also compiles the NSIS script and resolves the apps' current releases.

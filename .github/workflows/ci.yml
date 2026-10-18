@@ -20,7 +20,7 @@ jobs:
       - name: Syntax
         run: |
           for f in scripts/*.mjs; do node --check "$f"; done
-          bash -n installers/windows/build.sh installers/macos/build-pkg.sh installers/linux/build.sh installers/linux/install-header.sh
+          bash -n installers/windows/build.sh installers/macos/build-pkg.sh installers/linux/build.sh installers/linux/install-header.sh scripts/set-repo-metadata.sh
           node -e "JSON.parse(require('fs').readFileSync('suite.json','utf8')); JSON.parse(require('fs').readFileSync('QuillOffice.meta.json','utf8'))"
       - name: Unit tests
         run: node --test tests/*.test.mjs
