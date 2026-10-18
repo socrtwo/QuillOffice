@@ -25,7 +25,7 @@ The release notes list the exact version of each app in the bundle, and `SHA256S
 1. **Resolve** — `scripts/resolve.mjs` asks GitHub for the newest release of each app in [suite.json](suite.json) (prereleases included unless *stable only* is chosen) and matches its files against the patterns there. The result is `manifest.json`, which is also attached to the release.
 2. **Download and verify** — each bundle job downloads only the files it needs and checks them against the app's `SHA256SUMS.txt` where the app publishes one.
 3. **Bundle** — `installers/windows` (NSIS, built on Linux with `makensis`), `installers/macos` (`pkgbuild` and `productbuild`), `installers/linux` (a shell header with a tar payload), and `scripts/bundle-portable.mjs` for the web, Android and iOS archives.
-4. **Publish** — checksums, release notes with the component versions, one GitHub release. A platform that fails is listed in the notes instead of blocking the others.
+4. **Publish** — checksums, release notes with the component versions, one GitHub release. The release is published only when every platform bundle built, so a release never ships a partial suite.
 
 Nothing is recompiled here; the apps' own CI builds and tests them. See [docs/BUILD.md](docs/BUILD.md) to build a bundle locally.
 
