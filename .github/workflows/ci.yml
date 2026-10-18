@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check scripts and installers
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Syntax
+        run: |
+          for f in scripts/*.mjs; do node --check "$f"; done
+          bash -n installers/windows/build.sh installers/macos/build-pkg.sh installers/linux/build.sh installers/linux/install-header.sh
+          node -e "JSON.parse(require('fs').readFileSync('suite.json','utf8')); JSON.parse(require('fs').readFileSync('QuillOffice.meta.json','utf8'))"
+      - name: Unit tests
+        run: node --test tests/*.test.mjs
+      - name: Resolve the apps' releases (no downloads)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs manifest --out manifest.json && cat manifest.json
+      - name: NSIS script compiles (with empty payload files)
+        run: |
+          sudo apt-get update -q && sudo apt-get install -y -q nsis
+          mkdir -p /tmp/payload && for f in a.exe b.exe c.msi d.exe; do echo x > /tmp/payload/$f; done
+          makensis -V2 -DVERSION=0.0.0 -DARCH=x64 -DPAYLOAD=/tmp/payload -DOUTFILE=/tmp/test-setup.exe \
+            -DPEN_FILE=a.exe -DPEN_VERSION=0 -DGRID_FILE=b.exe -DGRID_VERSION=0 -DPOST_FILE=c.msi -DPOST_VERSION=0 -DSTAGE_FILE=d.exe -DSTAGE_VERSION=0 \
+            installers/windows/QuillOffice.nsi

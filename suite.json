@@ -1,0 +1,98 @@
+{
+  "$comment": "The apps QuillOffice bundles, where their releases live, and how each release names its files. scripts/resolve.mjs reads this. Patterns are regular expressions matched against release asset names; {v} is the app's version (the tag without a leading v and without a -build.N suffix) and {tag} the full tag.",
+  "owner": "socrtwo",
+  "apps": {
+    "QuillPen": {
+      "include": true,
+      "repo": "QuillPen",
+      "label": "QuillPen",
+      "summary": "Word processor",
+      "id": "io.github.socrtwo.quillpen",
+      "assets": {
+        "win-x64": "^QuillPen-{v}-windows-x64-setup\\.exe$",
+        "win-arm64": "^QuillPen-{v}-windows-arm64-setup\\.exe$",
+        "win-portable": "^QuillPen-{v}-windows-portable\\.exe$",
+        "mac": "^QuillPen-{v}-mac-universal\\.zip$",
+        "linux-deb-x64": "^QuillPen-{v}-linux-amd64\\.deb$",
+        "linux-deb-arm64": "^QuillPen-{v}-linux-arm64\\.deb$",
+        "linux-deb-armv7l": "^QuillPen-{v}-linux-armv7l\\.deb$",
+        "linux-appimage-x64": "^QuillPen-{v}-linux-x86_64\\.AppImage$",
+        "linux-appimage-arm64": "^QuillPen-{v}-linux-arm64\\.AppImage$",
+        "linux-appimage-armv7l": "^QuillPen-{v}-linux-armv7l\\.AppImage$",
+        "android": "^QuillPen-{v}\\.apk$",
+        "ios": "^QuillPen-{v}-ios-unsigned\\.ipa$",
+        "web": "^QuillPen-{v}-web\\.zip$",
+        "sums": "^SHA256SUMS\\.txt$"
+      }
+    },
+    "QuillGrid": {
+      "include": true,
+      "repo": "QuillGrid",
+      "label": "QuillGrid",
+      "summary": "Spreadsheet",
+      "id": "io.github.socrtwo.quillgrid",
+      "assets": {
+        "win-x64": "^QuillGrid-{v}-windows-x64-setup\\.exe$",
+        "win-arm64": "^QuillGrid-{v}-windows-arm64-setup\\.exe$",
+        "win-portable": "^QuillGrid-{v}-windows-portable\\.exe$",
+        "mac": "^QuillGrid-{v}-mac-universal\\.zip$",
+        "linux-deb-x64": "^QuillGrid-{v}-linux-amd64\\.deb$",
+        "linux-deb-arm64": "^QuillGrid-{v}-linux-arm64\\.deb$",
+        "linux-deb-armv7l": "^QuillGrid-{v}-linux-armv7l\\.deb$",
+        "linux-appimage-x64": "^QuillGrid-{v}-linux-x86_64\\.AppImage$",
+        "linux-appimage-arm64": "^QuillGrid-{v}-linux-arm64\\.AppImage$",
+        "linux-appimage-armv7l": "^QuillGrid-{v}-linux-armv7l\\.AppImage$",
+        "android": "^QuillGrid-{v}\\.apk$",
+        "ios": "^QuillGrid-{v}-ios-unsigned\\.ipa$",
+        "web": "^QuillGrid-{v}-web\\.zip$",
+        "sums": "^SHA256SUMS\\.txt$"
+      }
+    },
+    "QuillPost": {
+      "include": true,
+      "repo": "QuillPost",
+      "label": "QuillPost",
+      "summary": "Email, calendar and contacts",
+      "id": "info.socrtwo.quillpost",
+      "$comment": "QuillPost is a Kotlin application. Its desktop installers come from Compose Multiplatform (MSI, DMG, DEB) and are built per architecture: Windows x64, macOS Apple silicon, Linux x64 and arm64. Its web edition is a JVM server, and its iOS build is a simulator app, which cannot be installed on a device, so it is not bundled.",
+      "assets": {
+        "win-x64": "^quillpost-desktop-{tag}-windows-x64\\.msi$",
+        "win-portable": "^quillpost-desktop-{tag}-windows-x64-portable\\.zip$",
+        "mac": "^quillpost-desktop-{tag}-macos-arm64\\.dmg$",
+        "linux-deb-x64": "^quillpost-desktop-{tag}-linux-x64\\.deb$",
+        "linux-deb-arm64": "^quillpost-desktop-{tag}-linux-arm64\\.deb$",
+        "android": "^quillpost-{tag}(-unsigned)?\\.apk$",
+        "web": "^quillpost-web-{tag}-any-jvm\\.zip$"
+      }
+    },
+    "QuillStage": {
+      "include": true,
+      "repo": "QuillStage",
+      "label": "QuillStage",
+      "summary": "Presentations",
+      "id": "io.github.socrtwo.quillstage",
+      "assets": {
+        "win-x64": "^QuillStage-{v}-windows-x64-setup\\.exe$",
+        "win-arm64": "^QuillStage-{v}-windows-arm64-setup\\.exe$",
+        "win-portable": "^QuillStage-{v}-windows-portable\\.exe$",
+        "mac": "^QuillStage-{v}-mac-universal\\.zip$",
+        "linux-deb-x64": "^QuillStage-{v}-linux-amd64\\.deb$",
+        "linux-deb-arm64": "^QuillStage-{v}-linux-arm64\\.deb$",
+        "linux-deb-armv7l": "^QuillStage-{v}-linux-armv7l\\.deb$",
+        "linux-appimage-x64": "^QuillStage-{v}-linux-x86_64\\.AppImage$",
+        "linux-appimage-arm64": "^QuillStage-{v}-linux-arm64\\.AppImage$",
+        "linux-appimage-armv7l": "^QuillStage-{v}-linux-armv7l\\.AppImage$",
+        "android": "^QuillStage-{v}\\.apk$",
+        "ios": "^QuillStage-{v}-ios-unsigned\\.ipa$",
+        "web": "^QuillStage-{v}-web\\.zip$",
+        "sums": "^SHA256SUMS\\.txt$"
+      }
+    },
+    "QuillLoom": {
+      "include": false,
+      "repo": "QuillLoom",
+      "label": "QuillLoom",
+      "$comment": "Not part of the bundle yet. Set include to true and add its asset patterns when it is."
+    }
+  }
+}

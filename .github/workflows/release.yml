@@ -1,0 +1,205 @@
+name: Release
+
+# Builds the QuillOffice bundles for every platform from the newest release of each Quill app and
+# publishes them as one GitHub release:
+#   Windows x64 / arm64 setup (NSIS, one tick box per app)      macOS .pkg (one choice per app)
+#   Linux x64 / arm64 / armv7l self-extracting .deb installer    Linux AppImages archive
+#   Android APKs zip                                             iOS unsigned .ipa zip
+#   Web zip (all apps + launcher page)
+# Run it from the Actions tab (any branch: published as a prerelease v<version>-build.<run>),
+# push a tag v<version>, or push a commit whose message contains [release] (prerelease).
+
+on:
+  workflow_dispatch:
+    inputs:
+      prerelease:
+        description: 'Mark the release as a prerelease'
+        type: boolean
+        default: true
+      stable_only:
+        description: 'Bundle only the apps'' non-prerelease releases'
+        type: boolean
+        default: false
+  push:
+    tags: ['v*']
+    branches: ['**']
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    name: Resolve app releases
+    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[release]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - id: v
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+      - name: Find the newest release of each app
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs manifest ${{ inputs.stable_only && '--stable' || '' }} --out manifest.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: manifest
+          path: manifest.json
+
+  windows:
+    name: Windows (${{ matrix.arch }})
+    needs: resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with: { name: manifest }
+      - name: Install NSIS
+        run: sudo apt-get update -q && sudo apt-get install -y -q nsis
+      - name: Download the apps' Windows installers
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs download win-${{ matrix.arch }} --out payload
+      - name: Build the setup
+        run: installers/windows/build.sh ${{ matrix.arch }} payload out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QuillOffice-windows-${{ matrix.arch }}
+          path: out/*
+
+  macos:
+    name: macOS
+    needs: resolve
+    runs-on: macos-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with: { name: manifest }
+      - name: Download the apps' macOS builds
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs download mac --out payload
+      - name: Build the installer package
+        run: installers/macos/build-pkg.sh payload out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QuillOffice-macos
+          path: out/*
+
+  linux:
+    name: Linux (${{ matrix.arch }})
+    needs: resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [x64, arm64, armv7l]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with: { name: manifest }
+      - name: Download the apps' Linux packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs download linux-deb-${{ matrix.arch }} linux-appimage-${{ matrix.arch }} --out payload
+      - name: Build the installer and the AppImages archive
+        run: installers/linux/build.sh ${{ matrix.arch }} payload out
+      - name: Check the installer unpacks
+        run: f=$(ls out/*.sh | head -n1); [ -z "$f" ] || sh "$f" --list
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QuillOffice-linux-${{ matrix.arch }}
+          path: out/*
+
+  portable:
+    name: Web, Android, iOS
+    needs: resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with: { name: manifest }
+      - name: Download the apps' web, Android and iOS builds
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/resolve.mjs download web android ios --out payload
+      - name: Build the archives
+        run: |
+          node scripts/bundle-portable.mjs web payload out
+          node scripts/bundle-portable.mjs android payload out
+          node scripts/bundle-portable.mjs ios payload out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QuillOffice-portable
+          path: out/*
+
+  publish:
+    name: Publish release
+    needs: [resolve, windows, macos, linux, portable]
+    if: always() && needs.resolve.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: QuillOffice-*
+          path: out
+          merge-multiple: true
+      - uses: actions/download-artifact@v4
+        with: { name: manifest }
+      - name: Checksums and notes
+        id: meta
+        run: |
+          V="${{ needs.resolve.outputs.version }}"
+          if [[ "${{ github.ref }}" == refs/tags/v* ]]; then TAG="${{ github.ref_name }}"; PRE=false; else TAG="v$V-build.${{ github.run_number }}"; PRE=true; fi
+          [ "${{ github.event_name }}" = workflow_dispatch ] && PRE="${{ inputs.prerelease }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"; echo "prerelease=$PRE" >> "$GITHUB_OUTPUT"
+          (cd out && sha256sum QuillOffice-* > SHA256SUMS.txt)
+          node scripts/release-notes.mjs manifest.json out > notes.md
+          FAILED=""
+          [ "${{ needs.windows.result }}" = success ] || FAILED="$FAILED Windows"
+          [ "${{ needs.macos.result }}" = success ] || FAILED="$FAILED macOS"
+          [ "${{ needs.linux.result }}" = success ] || FAILED="$FAILED Linux"
+          [ "${{ needs.portable.result }}" = success ] || FAILED="$FAILED web/Android/iOS"
+          [ -z "$FAILED" ] || printf '\n> Some bundles could not be built in this run:%s. See the workflow log.\n' "$FAILED" >> notes.md
+          cp manifest.json out/QuillOffice-$V-manifest.json
+          ls -la out
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: QuillOffice ${{ steps.meta.outputs.tag }}
+          prerelease: ${{ steps.meta.outputs.prerelease }}
+          body_path: notes.md
+          files: |
+            out/QuillOffice-*
+            out/SHA256SUMS.txt
