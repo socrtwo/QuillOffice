@@ -160,7 +160,6 @@ jobs:
   publish:
     name: Publish release
     needs: [resolve, windows, macos, linux, portable]
-    if: always() && needs.resolve.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     permissions:
@@ -185,12 +184,6 @@ jobs:
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"; echo "prerelease=$PRE" >> "$GITHUB_OUTPUT"
           (cd out && sha256sum QuillOffice-* > SHA256SUMS.txt)
           node scripts/release-notes.mjs manifest.json out > notes.md
-          FAILED=""
-          [ "${{ needs.windows.result }}" = success ] || FAILED="$FAILED Windows"
-          [ "${{ needs.macos.result }}" = success ] || FAILED="$FAILED macOS"
-          [ "${{ needs.linux.result }}" = success ] || FAILED="$FAILED Linux"
-          [ "${{ needs.portable.result }}" = success ] || FAILED="$FAILED web/Android/iOS"
-          [ -z "$FAILED" ] || printf '\n> Some bundles could not be built in this run:%s. See the workflow log.\n' "$FAILED" >> notes.md
           cp manifest.json out/QuillOffice-$V-manifest.json
           ls -la out
       - uses: softprops/action-gh-release@v2

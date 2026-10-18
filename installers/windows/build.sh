@@ -4,7 +4,8 @@
 # The payload directory holds the apps' installers and payload.json from scripts/resolve.mjs.
 set -euo pipefail
 ARCH="$1"; PAYLOAD="$(cd "$2" && pwd)"; OUT="$(mkdir -p "$3" && cd "$3" && pwd)"
-VERSION="$(node -p "require('$(dirname "$0")/../../package.json').version")"
+HERE="$(cd "$(dirname "$0")" && pwd)"
+VERSION="$(node -p "require('$HERE/../../package.json').version")"
 KEY="win-$ARCH"
 defs=()
 # Maps each app to its NSIS define prefix.
@@ -19,5 +20,5 @@ done < <(node -e "
 ")
 if [ ${#defs[@]} -eq 0 ]; then echo "No Windows $ARCH installers in $PAYLOAD"; exit 1; fi
 OUTFILE="$OUT/QuillOffice-$VERSION-windows-$ARCH-setup.exe"
-makensis -V2 -DVERSION="$VERSION" -DARCH="$ARCH" -DPAYLOAD="$PAYLOAD" -DOUTFILE="$OUTFILE" "${defs[@]}" "$(dirname "$0")/QuillOffice.nsi"
+makensis -V2 -DVERSION="$VERSION" -DARCH="$ARCH" -DPAYLOAD="$PAYLOAD" -DOUTFILE="$OUTFILE" "${defs[@]}" "$HERE/QuillOffice.nsi"
 ls -la "$OUTFILE"
