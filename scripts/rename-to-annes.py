@@ -345,8 +345,8 @@ def special_edits(root: str, dry: bool, changed: list):
                           '        assertEquals(4, win.size)\n'
                           '        assertTrue(win[0].endsWith("Programs\\\\Anne\'s Pen\\\\resources\\\\embed"))\n'
                           '        assertTrue(win[1].endsWith("Programs\\\\QuillPen\\\\resources\\\\embed")) // rename:keep\n'
-                          '        assertTrue(win[2].endsWith("Files\\\\Anne\'s Pen\\\\resources\\\\embed"))\n'
-                          '        assertTrue(win[3].endsWith("Files\\\\QuillPen\\\\resources\\\\embed")) // rename:keep\n')
+                          '        assertTrue(win[2].endsWith("Anne\'s Pen\\\\resources\\\\embed"))   // java.io.File joins with the host separator\n'
+                          '        assertTrue(win[3].endsWith("QuillPen\\\\resources\\\\embed")) // rename:keep\n')
             t = t.replace('assertEquals(listOf("/Applications/QuillPen.app/Contents/Resources/embed", "/Users/a/Applications/QuillPen.app/Contents/Resources/embed"), mac)\n',
                           'assertEquals(listOf("/Applications/Anne\'s Pen.app/Contents/Resources/embed", "/Users/a/Applications/Anne\'s Pen.app/Contents/Resources/embed",\n'
                           '            "/Applications/QuillPen.app/Contents/Resources/embed", "/Users/a/Applications/QuillPen.app/Contents/Resources/embed"), mac) // rename:keep\n')
