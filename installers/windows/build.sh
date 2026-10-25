@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the QuillOffice Windows setup for one architecture with makensis.
+# Builds the Anne's Office Windows setup for one architecture with makensis.
 #   installers/windows/build.sh <x64|arm64> <payload dir> <out dir>
 # The payload directory holds the apps' installers and payload.json from scripts/resolve.mjs.
 set -euo pipefail

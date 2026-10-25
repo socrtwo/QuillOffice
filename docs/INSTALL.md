@@ -1,6 +1,6 @@
-# Installing QuillOffice
+# Installing Anne's Office
 
-Every [release](../../../releases) has one bundle per platform. Each bundle installs the Quill apps side by side; nothing is shared between them, and each app can be removed on its own afterwards.
+Every [release](../../../releases) has one bundle per platform. Each bundle installs the Anne's Office apps side by side; nothing is shared between them, and each app can be removed on its own afterwards.
 
 ## Windows 10 and 11
 
@@ -8,7 +8,7 @@ Download `QuillOffice-<version>-windows-x64-setup.exe` (or `-arm64-` on Windows 
 
 SmartScreen may say "Windows protected your PC" for the setup and once more for each app's installer: choose **More info ▸ Run anyway**. The warning appears because the installers are not signed with a paid code-signing certificate; the checksums in `SHA256SUMS.txt` let you verify the download.
 
-To remove an app: **Settings ▸ Apps ▸ Installed apps**, find the app, **Uninstall**. QuillOffice itself installs nothing of its own.
+To remove an app: **Settings ▸ Apps ▸ Installed apps**, find the app, **Uninstall**. Anne's Office itself installs nothing of its own.
 
 ## macOS 12 and later
 
@@ -16,7 +16,7 @@ Download `QuillOffice-<version>-mac.pkg`, open it, and untick any app you do not
 
 The package and the apps are not notarized. If macOS refuses to open the package, right-click it and choose **Open**, or allow it in **System Settings ▸ Privacy & Security**. The first launch of each app may ask the same way.
 
-QuillPost's macOS build is for Apple silicon only. On an Intel Mac the installer leaves it out; its portable (Java) edition is on the [QuillPost releases page](https://github.com/socrtwo/QuillPost/releases).
+Anne's Post's macOS build is for Apple silicon only. On an Intel Mac the installer leaves it out; its portable (Java) edition is on the [Anne's Post releases page](https://github.com/socrtwo/QuillPost/releases).
 
 To remove an app, drag it from *Applications* to the Trash.
 
@@ -42,8 +42,8 @@ Download `QuillOffice-<version>-android.zip`, unzip it, and open each APK. Andro
 
 ## iOS and iPadOS 15 and later
 
-Download `QuillOffice-<version>-ios-unsigned.zip`. The `.ipa` files inside are unsigned; sign and install each one with your own Apple ID using a sideloading tool such as AltStore or Sideloadly. A free Apple ID allows three sideloaded apps at a time and re-signing every seven days. QuillPost has no device build for iOS yet.
+Download `QuillOffice-<version>-ios-unsigned.zip`. The `.ipa` files inside are unsigned; sign and install each one with your own Apple ID using a sideloading tool such as AltStore or Sideloadly. A free Apple ID allows three sideloaded apps at a time and re-signing every seven days. Anne's Post has no device build for iOS yet.
 
 ## Web
 
-Download `QuillOffice-<version>-web.zip` and serve the unpacked folder from any web server (the apps need `http://` or `https://`, not `file://`). `index.html` is a launcher page with a card per app. Each app works offline after its first visit and can be installed from the browser's menu. QuillPost's web edition is a Java server: unzip its archive, run `bin/quillpost-web` (Java 17 or later) and open the address it prints.
+Download `QuillOffice-<version>-web.zip` and serve the unpacked folder from any web server (the apps need `http://` or `https://`, not `file://`). `index.html` is a launcher page with a card per app. Each app works offline after its first visit and can be installed from the browser's menu. Anne's Post's web edition is a Java server: unzip its archive, run `bin/quillpost-web` (Java 17 or later) and open the address it prints.

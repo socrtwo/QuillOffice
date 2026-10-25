@@ -1,5 +1,5 @@
 #!/bin/sh
-# QuillOffice @VERSION@ (@ARCH@): installs the Quill suite on Debian, Ubuntu, Raspberry Pi OS and other
+# Anne's Office @VERSION@ (@ARCH@): installs the Anne's Office suite on Debian, Ubuntu, Raspberry Pi OS and other
 # Debian-based systems. A gzip tar archive of the apps' .deb packages follows this script.
 #   sh QuillOffice-@VERSION@-linux-@ARCH@.sh [--apps pen,grid,post,stage] [--list] [--extract DIR]
 # Other distributions: use the AppImages archive from the same release.
@@ -21,7 +21,7 @@ WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
 LINE=$(awk '/^__PAYLOAD_BELOW__$/ { print NR + 1; exit 0; }' "$0")
 tail -n +"$LINE" "$0" | tar -xzf - -C "$WORK"
-if [ "$LIST" = 1 ]; then echo "QuillOffice @VERSION@ (@ARCH@) contains:"; cat "$WORK/APPS.txt"; exit 0; fi
+if [ "$LIST" = 1 ]; then echo "Anne's Office @VERSION@ (@ARCH@) contains:"; cat "$WORK/APPS.txt"; exit 0; fi
 if [ -n "$EXTRACT" ]; then mkdir -p "$EXTRACT"; cp "$WORK"/*.deb "$EXTRACT/"; echo "Packages copied to $EXTRACT"; exit 0; fi
 
 want() { case ",$APPS," in *",$1,"*) return 0 ;; *) return 1 ;; esac; }
@@ -36,7 +36,7 @@ for f in "$WORK"/*.deb; do
   esac
 done
 if [ -z "$PKGS" ]; then echo "Nothing selected. Apps in this bundle:"; cat "$WORK/APPS.txt"; exit 1; fi
-echo "QuillOffice @VERSION@ will install:"; for p in $PKGS; do echo "  $(basename "$p")"; done
+echo "Anne's Office @VERSION@ will install:"; for p in $PKGS; do echo "  $(basename "$p")"; done
 SUDO=""; [ "$(id -u)" -ne 0 ] && SUDO="sudo"
 # shellcheck disable=SC2086
 if command -v apt-get >/dev/null 2>&1; then
@@ -44,7 +44,7 @@ if command -v apt-get >/dev/null 2>&1; then
 elif command -v dpkg >/dev/null 2>&1; then
   $SUDO dpkg -i $PKGS || $SUDO apt-get -f install -y
 else
-  echo "This system has no dpkg. Use the AppImages archive from the QuillOffice release instead."; exit 1
+  echo "This system has no dpkg. Use the AppImages archive from the Anne's Office release instead."; exit 1
 fi
 echo "Done. The apps are in your applications menu (Office)."
 exit 0

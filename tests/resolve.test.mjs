@@ -20,7 +20,7 @@ test('electron-builder style releases match every key', () => {
   assert.equal(got.mac.name, 'QuillStage-0.1.1-mac-universal.zip');
 });
 
-test('QuillPost releases match by tag', () => {
+test('Anne\'s Post releases match by tag', () => {
   const names = ['quillpost-desktop-v1.4.0-windows-x64.msi', 'quillpost-desktop-v1.4.0-windows-x64-portable.zip', 'quillpost-desktop-v1.4.0-macos-arm64.dmg', 'quillpost-desktop-v1.4.0-linux-x64.deb', 'quillpost-desktop-v1.4.0-linux-arm64.deb', 'quillpost-v1.4.0-unsigned.apk', 'quillpost-v1.4.0-debug.apk', 'quillpost-web-v1.4.0-any-jvm.zip', 'QuillPost-iOS-simulator-v1.4.0.app.zip'];
   const rel = { tag_name: 'v1.4.0', assets: names.map((n) => ({ name: n, browser_download_url: 'u/' + n, size: 1 })) };
   const got = matchAssets(suite.apps.QuillPost, rel);
@@ -30,7 +30,7 @@ test('QuillPost releases match by tag', () => {
   assert.equal(got['win-arm64'], undefined);
 });
 
-test('QuillLoom is listed but not included', () => {
+test('Anne\'s Loom is listed but not included', () => {
   assert.equal(suite.apps.QuillLoom.include, false);
   assert.deepEqual(Object.entries(suite.apps).filter(([, a]) => a.include).map(([n]) => n), ['QuillPen', 'QuillGrid', 'QuillPost', 'QuillStage']);
 });
