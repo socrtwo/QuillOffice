@@ -1,6 +1,6 @@
-# Contributing to QuillOffice
+# Contributing to Anne's Office
 
-QuillOffice only packages the Quill apps. A bug in an app belongs in that app's repository ([QuillPen](https://github.com/socrtwo/QuillPen/issues), [QuillGrid](https://github.com/socrtwo/QuillGrid/issues), [QuillPost](https://github.com/socrtwo/QuillPost/issues), [QuillStage](https://github.com/socrtwo/QuillStage/issues)). Issues here are for the installers and bundles: an app missing from a bundle, an installer that fails on a platform, a wrong version in the release notes.
+Anne's Office only packages the Anne's Office apps. A bug in an app belongs in that app's repository ([Anne's Pen](https://github.com/socrtwo/QuillPen/issues), [Anne's Grid](https://github.com/socrtwo/QuillGrid/issues), [Anne's Post](https://github.com/socrtwo/QuillPost/issues), [Anne's Stage](https://github.com/socrtwo/QuillStage/issues)). Issues here are for the installers and bundles: an app missing from a bundle, an installer that fails on a platform, a wrong version in the release notes.
 
 When you report an installer problem, include the platform and version, the bundle file name, and the installer's output (the Windows setup shows a details log; the Linux `.sh` prints to the terminal; macOS keeps `/var/log/install.log`).
 

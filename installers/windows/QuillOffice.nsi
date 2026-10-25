@@ -1,4 +1,4 @@
-; QuillOffice Windows installer: one setup that installs the Quill apps you tick.
+; Anne's Office Windows installer: one setup that installs the Anne's Office apps you tick.
 ; Each app's own installer (built by that app's release) is embedded and run silently.
 ; Built with makensis (NSIS 3) on any OS; the payload files come from scripts/resolve.mjs.
 ;
@@ -12,20 +12,20 @@ Unicode true
 !include "MUI2.nsh"
 !include "x64.nsh"
 
-Name "QuillOffice ${VERSION}"
+Name "Anne's Office ${VERSION}"
 OutFile "${OUTFILE}"
-; Nothing of QuillOffice's own is installed; only an uninstall-helper note goes here.
+; Nothing of Anne's Office's own is installed; only an uninstall-helper note goes here.
 InstallDir "$LOCALAPPDATA\Programs\QuillOffice"
 RequestExecutionLevel user
 ; The embedded installers are already compressed.
 SetCompress off
-BrandingText "QuillOffice ${VERSION} (${ARCH}) — MIT License"
+BrandingText "Anne's Office ${VERSION} (${ARCH}) — MIT License"
 
 !define MUI_ABORTWARNING
 !define MUI_COMPONENTSPAGE_SMALLDESC
-!define MUI_WELCOMEPAGE_TITLE "QuillOffice ${VERSION}"
-!define MUI_WELCOMEPAGE_TEXT "This installs the Quill suite: QuillPen (documents), QuillGrid (spreadsheets), QuillPost (email) and QuillStage (presentations).$\r$\n$\r$\nEach app is installed by its own installer, for the current user, and appears in the Start menu and in Apps & features on its own. Untick any app you do not want.$\r$\n$\r$\nThe apps are open source (MIT License) and are not signed with a paid certificate, so Windows SmartScreen may ask once per app."
-!define MUI_FINISHPAGE_TITLE "QuillOffice is installed"
+!define MUI_WELCOMEPAGE_TITLE "Anne's Office ${VERSION}"
+!define MUI_WELCOMEPAGE_TEXT "This installs the Anne's Office suite: Anne's Pen (documents), Anne's Grid (spreadsheets), Anne's Post (email) and Anne's Stage (presentations).$\r$\n$\r$\nEach app is installed by its own installer, for the current user, and appears in the Start menu and in Apps & features on its own. Untick any app you do not want.$\r$\n$\r$\nThe apps are open source (MIT License) and are not signed with a paid certificate, so Windows SmartScreen may ask once per app."
+!define MUI_FINISHPAGE_TITLE "Anne's Office is installed"
 !define MUI_FINISHPAGE_TEXT "The apps you chose are in the Start menu. Each one can be removed separately from Settings ▸ Apps."
 
 !insertmacro MUI_PAGE_WELCOME
@@ -41,7 +41,7 @@ Function .onInit
   StrCpy $Failed ""
 !if "${ARCH}" == "arm64"
   ${IfNot} ${IsNativeARM64}
-    MessageBox MB_ICONSTOP "This QuillOffice setup is for Windows on ARM. Download the x64 setup for this computer."
+    MessageBox MB_ICONSTOP "This Anne's Office setup is for Windows on ARM. Download the x64 setup for this computer."
     Abort
   ${EndIf}
 !else
@@ -50,7 +50,7 @@ Function .onInit
       MessageBox MB_ICONQUESTION|MB_YESNO "This setup contains x64 apps. They run on this ARM computer through emulation, but the arm64 setup would be faster. Install the x64 apps anyway?" IDYES +2
       Abort
     ${Else}
-      MessageBox MB_ICONSTOP "QuillOffice needs 64-bit Windows."
+      MessageBox MB_ICONSTOP "Anne's Office needs 64-bit Windows."
       Abort
     ${EndIf}
   ${EndIf}
@@ -87,26 +87,26 @@ FunctionEnd
 !macroend
 
 !ifdef PEN_FILE
-Section "QuillPen ${PEN_VERSION} (documents)" SecPen
-  !insertmacro RunNsis "QuillPen" "${PEN_FILE}"
+Section "Anne's Pen ${PEN_VERSION} (documents)" SecPen
+  !insertmacro RunNsis "Anne's Pen" "${PEN_FILE}"
 SectionEnd
 !endif
 
 !ifdef GRID_FILE
-Section "QuillGrid ${GRID_VERSION} (spreadsheets)" SecGrid
-  !insertmacro RunNsis "QuillGrid" "${GRID_FILE}"
+Section "Anne's Grid ${GRID_VERSION} (spreadsheets)" SecGrid
+  !insertmacro RunNsis "Anne's Grid" "${GRID_FILE}"
 SectionEnd
 !endif
 
 !ifdef POST_FILE
-Section "QuillPost ${POST_VERSION} (email)" SecPost
-  !insertmacro RunMsi "QuillPost" "${POST_FILE}"
+Section "Anne's Post ${POST_VERSION} (email)" SecPost
+  !insertmacro RunMsi "Anne's Post" "${POST_FILE}"
 SectionEnd
 !endif
 
 !ifdef STAGE_FILE
-Section "QuillStage ${STAGE_VERSION} (presentations)" SecStage
-  !insertmacro RunNsis "QuillStage" "${STAGE_FILE}"
+Section "Anne's Stage ${STAGE_VERSION} (presentations)" SecStage
+  !insertmacro RunNsis "Anne's Stage" "${STAGE_FILE}"
 SectionEnd
 !endif
 

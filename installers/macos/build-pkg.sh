@@ -38,7 +38,7 @@ done < <(node -e "
 cat > "$WORK/distribution.xml" <<EOF
 <?xml version="1.0" encoding="utf-8"?>
 <installer-gui-script minSpecVersion="2">
-  <title>QuillOffice $VERSION</title>
+  <title>Anne's Office $VERSION</title>
   <welcome file="welcome.html"/>
   <options customize="always" require-scripts="false" hostArchitectures="arm64,x86_64"/>
   <domains enable_localSystem="true" enable_anywhere="false" enable_currentUserHome="false"/>
@@ -50,9 +50,9 @@ EOF
 mkdir -p "$WORK/res"
 cat > "$WORK/res/welcome.html" <<'EOF'
 <html><body style="font-family:-apple-system,sans-serif;font-size:13px">
-<p>QuillOffice installs the Quill suite into Applications: QuillPen (documents), QuillGrid (spreadsheets), QuillPost (email) and QuillStage (presentations). Untick any app you do not want on the next screen.</p>
+<p>Anne's Office installs the Anne's Office suite into Applications: Anne's Pen (documents), Anne's Grid (spreadsheets), Anne's Post (email) and Anne's Stage (presentations). Untick any app you do not want on the next screen.</p>
 <p>The apps are open source (MIT License). They are not notarized, so the first time you open each one, right-click it and choose Open, or allow it in System Settings &gt; Privacy &amp; Security.</p>
-<p>QuillPost's macOS build is for Apple silicon only; on an Intel Mac it is left out automatically by the installer, and its portable (Java) edition is available from its releases page.</p>
+<p>Anne's Post's macOS build is for Apple silicon only; on an Intel Mac it is left out automatically by the installer, and its portable (Java) edition is available from its releases page.</p>
 </body></html>
 EOF
 productbuild --distribution "$WORK/distribution.xml" --resources "$WORK/res" --package-path "$WORK/pkgs" --version "$VERSION" "$OUT/QuillOffice-$VERSION-mac.pkg"

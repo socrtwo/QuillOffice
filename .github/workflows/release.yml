@@ -1,6 +1,6 @@
 name: Release
 
-# Builds the QuillOffice bundles for every platform from the newest release of each Quill app and
+# Builds the Anne's Office bundles for every platform from the newest release of each Anne's Office app and
 # publishes them as one GitHub release:
 #   Windows x64 / arm64 setup (NSIS, one tick box per app)      macOS .pkg (one choice per app)
 #   Linux x64 / arm64 / armv7l self-extracting .deb installer    Linux AppImages archive
@@ -190,7 +190,7 @@ jobs:
         with:
           tag_name: ${{ steps.meta.outputs.tag }}
           target_commitish: ${{ github.sha }}
-          name: QuillOffice ${{ steps.meta.outputs.tag }}
+          name: Anne's Office ${{ steps.meta.outputs.tag }}
           prerelease: ${{ steps.meta.outputs.prerelease }}
           body_path: notes.md
           files: |

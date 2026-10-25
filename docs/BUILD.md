@@ -1,6 +1,6 @@
-# Building QuillOffice bundles
+# Building Anne's Office bundles
 
-QuillOffice compiles nothing. It downloads each app's released files and wraps them. You need Node.js 22 and, per bundle, the packaging tool of that platform.
+Anne's Office compiles nothing. It downloads each app's released files and wraps them. You need Node.js 22 and, per bundle, the packaging tool of that platform.
 
 ```bash
 npm test                                # unit tests for the release matcher
@@ -18,7 +18,7 @@ node scripts/resolve.mjs download win-x64 --out payload      # or win-arm64
 installers/windows/build.sh x64 payload out                  # Debian/Ubuntu: sudo apt install nsis
 ```
 
-`installers/windows/QuillOffice.nsi` is the installer script: a components page with one section per app, each running that app's own installer silently (`/S` for the NSIS installers of QuillPen, QuillGrid and QuillStage; `msiexec /qn` for QuillPost's MSI). An app that fails to install is reported at the end instead of stopping the others.
+`installers/windows/QuillOffice.nsi` is the installer script: a components page with one section per app, each running that app's own installer silently (`/S` for the NSIS installers of Anne's Pen, Anne's Grid and Anne's Stage; `msiexec /qn` for Anne's Post's MSI). An app that fails to install is reported at the end instead of stopping the others.
 
 ## macOS package (macOS only)
 
@@ -50,7 +50,7 @@ node scripts/bundle-portable.mjs ios payload out
 
 ## Adding or removing an app
 
-Edit [suite.json](../suite.json): set `include`, and give the regular expressions that match the app's release file names (`{v}` is the version, `{tag}` the tag). Run `npm test` (the tests check the patterns against sample file lists) and `node scripts/resolve.mjs manifest` to see what a real release matches. QuillLoom is already listed with `"include": false`.
+Edit [suite.json](../suite.json): set `include`, and give the regular expressions that match the app's release file names (`{v}` is the version, `{tag}` the tag). Run `npm test` (the tests check the patterns against sample file lists) and `node scripts/resolve.mjs manifest` to see what a real release matches. Anne's Loom is already listed with `"include": false`.
 
 ## Releasing
 

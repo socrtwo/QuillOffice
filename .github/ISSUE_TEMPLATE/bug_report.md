@@ -1,6 +1,6 @@
 ---
 name: Installer problem
-about: A QuillOffice bundle did not install an app, or the release is missing something
+about: An Anne's Office bundle did not install an app, or the release is missing something
 title: ''
 labels: bug
 assignees: ''
@@ -16,4 +16,4 @@ Operating system and version, architecture (x64, arm64, armv7l).
 What you did, what you expected, what happened instead. Paste the installer's output or log if you have it.
 
 **Is it the app itself?**
-If the app installs but misbehaves, report it in that app's repository instead: QuillPen, QuillGrid, QuillPost or QuillStage.
+If the app installs but misbehaves, report it in that app's repository instead: Anne's Pen, Anne's Grid, Anne's Post or QuillStage.

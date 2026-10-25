@@ -1,8 +1,8 @@
-# QuillOffice
+# Anne's Office
 
-*The Quill suite in one download: [QuillPen](https://github.com/socrtwo/QuillPen) (documents), [QuillGrid](https://github.com/socrtwo/QuillGrid) (spreadsheets), [QuillPost](https://github.com/socrtwo/QuillPost) (email) and [QuillStage](https://github.com/socrtwo/QuillStage) (presentations).*
+*The Anne's Office suite in one download: [Anne's Pen](https://github.com/socrtwo/QuillPen) (documents), [Anne's Grid](https://github.com/socrtwo/QuillGrid) (spreadsheets), [Anne's Post](https://github.com/socrtwo/QuillPost) (email) and [Anne's Stage](https://github.com/socrtwo/QuillStage) (presentations).*
 
-The four apps are developed and released in their own repositories. QuillOffice adds nothing to them; it is the installer that puts them on a computer together. Each **QuillOffice release** takes the newest release of every app and packages them per platform:
+The four apps are developed and released in their own repositories. Anne's Office adds nothing to them; it is the installer that puts them on a computer together. Each **Anne's Office release** takes the newest release of every app and packages them per platform:
 
 | Platform | What you download | What it does |
 |---|---|---|
@@ -16,7 +16,7 @@ The four apps are developed and released in their own repositories. QuillOffice 
 
 The release notes list the exact version of each app in the bundle, and `SHA256SUMS.txt` the checksum of every file. [docs/INSTALL.md](docs/INSTALL.md) has the steps for each platform.
 
-**QuillLoom** is not part of the bundle yet. It is listed in [suite.json](suite.json) with `"include": false` and joins the release when that is switched on.
+**Anne's Loom** is not part of the bundle yet. It is listed in [suite.json](suite.json) with `"include": false` and joins the release when that is switched on.
 
 ## How a release is built
 
@@ -34,18 +34,18 @@ The repository's description, homepage and topics live in [QuillOffice.meta.json
 ## Known limits
 
 - The desktop apps are not code-signed, so Windows SmartScreen and macOS Gatekeeper ask once per app (the installers say so).
-- QuillPost's desktop builds exist for Windows x64, macOS on Apple silicon, and Linux x64/arm64 only. The Windows on ARM setup leaves it out (its x64 build runs through emulation when installed separately); the macOS package skips it on Intel Macs; its iOS release is a simulator build and is not bundled. Its web edition is a Java server rather than a static site and is included as its own zip with instructions.
+- Anne's Post's desktop builds exist for Windows x64, macOS on Apple silicon, and Linux x64/arm64 only. The Windows on ARM setup leaves it out (its x64 build runs through emulation when installed separately); the macOS package skips it on Intel Macs; its iOS release is a simulator build and is not bundled. Its web edition is a Java server rather than a static site and is included as its own zip with instructions.
 - A bundle is only as current as the apps' releases at the moment it was built; it does not update itself. Each app keeps its own update path.
 
-## The Quill suite
+## The Anne's Office suite
 
 | App | What it is | Repository |
 |---|---|---|
-| **QuillPen** | Word processor | https://github.com/socrtwo/QuillPen |
-| **QuillGrid** | Spreadsheet | https://github.com/socrtwo/QuillGrid |
-| **QuillPost** | Email, calendar and contacts | https://github.com/socrtwo/QuillPost |
-| **QuillStage** | Presentations | https://github.com/socrtwo/QuillStage |
-| **QuillOffice** | The suite's combined installers (this project) | https://github.com/socrtwo/QuillOffice |
+| **Anne's Pen** | Word processor | https://github.com/socrtwo/QuillPen |
+| **Anne's Grid** | Spreadsheet | https://github.com/socrtwo/QuillGrid |
+| **Anne's Post** | Email, calendar and contacts | https://github.com/socrtwo/QuillPost |
+| **Anne's Stage** | Presentations | https://github.com/socrtwo/QuillStage |
+| **Anne's Office** | The suite's combined installers (this project) | https://github.com/socrtwo/QuillOffice |
 
 ## License
 
@@ -53,4 +53,4 @@ The repository's description, homepage and topics live in [QuillOffice.meta.json
 
 ## Legal
 
-QuillOffice and the Quill apps are independent, clean-room projects. They are not affiliated with, endorsed by, or sponsored by Microsoft, Apple, Google, The Document Foundation, or any other vendor. Product names appear only to describe file-format compatibility (nominative use). See [docs/LEGAL.md](docs/LEGAL.md).
+Anne's Office and the Anne's Office apps are independent, clean-room projects. They are not affiliated with, endorsed by, or sponsored by Microsoft, Apple, Google, The Document Foundation, or any other vendor. Product names appear only to describe file-format compatibility (nominative use). See [docs/LEGAL.md](docs/LEGAL.md).
