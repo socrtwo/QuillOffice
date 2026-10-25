@@ -71,7 +71,7 @@ ONLY_LINES = {
 }
 SKIP_FILES = (
     '.pbxproj', 'settings.gradle', 'settings.gradle.kts', 'package-lock.json', '.eml',
-    'suite/rename.py', 'suite/termux-suite-setup.sh', 'scripts/rename-to-annes.py',
+    'suite/rename.py', 'suite/termux-suite-setup.sh', 'scripts/rename-to-annes.py', 'scripts/rename-to-annes.sh',
 )
 JS_LIKE = ('.ts', '.js', '.mjs', '.cjs', '.gradle')
 
