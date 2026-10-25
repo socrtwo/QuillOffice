@@ -10,14 +10,14 @@
 #   bash rename-to-annes.sh              # do it
 #
 # Environment: OWNER (socrtwo), WORK (~/annes-office: where the clones live), BRANCH (main: the branch
-# to rewrite and push), SCRIPT_URL (where to fetch rename-to-annes.py from when the QuillOffice
+# to rewrite and push), SCRIPT_URL (where to fetch rename-to-annes.py from when the Anne's Office
 # checkout does not carry it yet). Safe to re-run: a repository with nothing left to rename is skipped.
 set -euo pipefail
 OWNER="${OWNER:-socrtwo}"
 WORK="${WORK:-$HOME/annes-office}"
 BRANCH="${BRANCH:-main}"
 SCRIPT_URL="${SCRIPT_URL:-https://raw.githubusercontent.com/$OWNER/QuillOffice/ccr-31d52d9f-rrlwpd/scripts/rename-to-annes.py}"
-REPOS=(QuillOffice QuillPen QuillGrid QuillPost QuillStage QuillLoom QuillPress QuillFolio QuillTest)
+REPOS=(Anne's Office Anne's Pen Anne's Grid Anne's Post Anne's Stage Anne's Loom Anne's Press Anne's Folio Anne's Test)
 DRY=0; [ "${1:-}" = "--dry-run" ] && DRY=1
 
 mkdir -p "$WORK"; cd "$WORK"
@@ -49,7 +49,7 @@ python3 "$SCRIPT" "${args[@]}" "${REPOS[@]}"
 # docs/COMMANDS.md lists commands alphabetically, so renamed labels change its order: regenerate it
 # where the dependencies are installed (npm ci first), otherwise say so.
 echo "== Command catalogs"
-for r in QuillPen QuillGrid QuillStage QuillFolio; do
+for r in Anne's Pen Anne's Grid Anne's Stage Anne's Folio; do
   if [ -d "$r/node_modules" ]; then (cd "$r" && npm run -s catalog) && echo "✓ $r catalog regenerated"
   else echo "· $r: run 'npm ci && npm run catalog' in $WORK/$r later (its test checks docs/COMMANDS.md is current)"; fi
 done
@@ -66,7 +66,7 @@ for r in "${REPOS[@]}"; do
   if [ -z "$(git -C "$r" status --porcelain)" ]; then echo "· $r: nothing to rename"; continue; fi
   git -C "$r" add -A
   git -C "$r" commit -q -m "Rename the suite's display names from Quill to Anne's" \
-    -m "Quill Office is now Anne's Office, QuillPen is Anne's Pen, and so on for Grid, Post, Stage, Loom, Press, Folio and Test, everywhere a name is shown or read as metadata. Identifiers (repository names and URLs, package and bundle ids, MIME types, release file names, executables, storage keys, the embed protocol) are unchanged. Done with QuillOffice/scripts/rename-to-annes.py."
+    -m "Anne's Office is now Anne's Office, Anne's Pen is Anne's Pen, and so on for Grid, Post, Stage, Loom, Press, Folio and Test, everywhere a name is shown or read as metadata. Identifiers (repository names and URLs, package and bundle ids, MIME types, release file names, executables, storage keys, the embed protocol) are unchanged. Done with QuillOffice/scripts/rename-to-annes.py."
   git -C "$r" push -q origin "$BRANCH"
   echo "✓ $r pushed"
 done
@@ -82,7 +82,7 @@ for r in "${REPOS[@]}"; do
   echo "✓ $r: $desc"
 done
 # Repositories that carry a full metadata file set every topic from it.
-for r in QuillOffice QuillFolio; do
+for r in Anne's Office Anne's Folio; do
   [ -f "$WORK/$r/scripts/set-repo-metadata.sh" ] && REPO="$OWNER/$r" bash "$WORK/$r/scripts/set-repo-metadata.sh"
 done
 echo "Done."

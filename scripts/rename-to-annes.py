@@ -61,6 +61,9 @@ KEEP_LINE = [re.compile(p) for p in (
     r'\bexecutableName\b',               # binaries keep their names
     r'^\s*Quill\w+:\s*\{',                # keys of a config map (QuillPen style set, suite icon table)
 )]
+# A `rename:keep` left by the earlier rename (QuillForge/QuillLattice/Quillbox -> QuillPen/QuillGrid/QuillPost)
+# protects old extensions and ids on its line, not the product name next to them, which is display text here.
+OLD_RENAME = re.compile(r'Quill(?:Forge|Lattice)|Quillbox|quillforge|quilllattice|quillbox')
 # Files where only some lines carry display text.
 ONLY_LINES = {
     'suite.json': re.compile(r'"(label|summary|\$comment)"'),
@@ -173,7 +176,7 @@ def rewrite_line(line: str, path: str) -> str:
     if base in ONLY_LINES and not ONLY_LINES[base].search(line):
         return line
     for rx in KEEP_LINE:
-        if rx.search(line):
+        if rx.search(line) and not (rx.pattern == 'rename:keep' and OLD_RENAME.search(line)):
             return line
     if base.endswith('.json'):
         m = KEYWORD.match(line)
@@ -309,7 +312,7 @@ def special_edits(root: str, dry: bool, changed: list):
     if app == 'Post':
         kt = 'web/src/main/kotlin/info/socrtwo/quillpost/web/QuillPenEmbed.kt'
         def locations(t):
-            if "Anne's Pen" in t:
+            if "Anne's Pen\\\\resources" in t:
                 return t
             t = t.replace(
                 'env("LOCALAPPDATA")?.takeIf { it.isNotBlank() }?.let { File(it, "Programs\\\\QuillPen\\\\resources\\\\embed") },\n',
@@ -334,7 +337,7 @@ def special_edits(root: str, dry: bool, changed: list):
 
         test = 'web/src/test/kotlin/info/socrtwo/quillpost/web/QuillPenEmbedTest.kt'
         def locations_test(t):
-            if "Anne's Pen" in t:
+            if "Anne's Pen\\\\resources" in t:
                 return t
             t = t.replace('        assertEquals(2, win.size)\n'
                           '        assertTrue(win[0].endsWith("Programs\\\\QuillPen\\\\resources\\\\embed"))\n'
