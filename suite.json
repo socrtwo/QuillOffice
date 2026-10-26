@@ -4,7 +4,7 @@
   "apps": {
     "QuillPen": {
       "include": true,
-      "repo": "QuillPen",
+      "repo": "annes-pen",
       "label": "Anne's Pen",
       "summary": "Word processor",
       "id": "io.github.socrtwo.quillpen",
@@ -27,7 +27,7 @@
     },
     "QuillGrid": {
       "include": true,
-      "repo": "QuillGrid",
+      "repo": "annes-grid",
       "label": "Anne's Grid",
       "summary": "Spreadsheet",
       "id": "io.github.socrtwo.quillgrid",
@@ -50,7 +50,7 @@
     },
     "QuillPost": {
       "include": true,
-      "repo": "QuillPost",
+      "repo": "annes-post",
       "label": "Anne's Post",
       "summary": "Email, calendar and contacts",
       "id": "info.socrtwo.quillpost",
@@ -67,7 +67,7 @@
     },
     "QuillStage": {
       "include": true,
-      "repo": "QuillStage",
+      "repo": "annes-stage",
       "label": "Anne's Stage",
       "summary": "Presentations",
       "id": "io.github.socrtwo.quillstage",
@@ -90,7 +90,7 @@
     },
     "QuillLoom": {
       "include": false,
-      "repo": "QuillLoom",
+      "repo": "annes-loom",
       "label": "Anne's Loom",
       "$comment": "Not part of the bundle yet. Set include to true and add its asset patterns when it is."
     }
