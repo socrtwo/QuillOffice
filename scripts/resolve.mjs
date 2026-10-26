@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Finds the newest release of every bundled Quill app, writes manifest.json, and downloads the
+// Finds the newest release of every bundled Anne's Office app, writes manifest.json, and downloads the
 // release files a bundle needs, checking them against the app's SHA256SUMS.txt when it publishes one.
 //
 //   node scripts/resolve.mjs manifest [--stable] [--out manifest.json]

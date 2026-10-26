@@ -1,11 +1,11 @@
 {
-  "$comment": "The apps QuillOffice bundles, where their releases live, and how each release names its files. scripts/resolve.mjs reads this. Patterns are regular expressions matched against release asset names; {v} is the app's version (the tag without a leading v and without a -build.N suffix) and {tag} the full tag.",
+  "$comment": "The apps Anne's Office bundles, where their releases live, and how each release names its files. scripts/resolve.mjs reads this. Patterns are regular expressions matched against release asset names; {v} is the app's version (the tag without a leading v and without a -build.N suffix) and {tag} the full tag.",
   "owner": "socrtwo",
   "apps": {
     "QuillPen": {
       "include": true,
       "repo": "QuillPen",
-      "label": "QuillPen",
+      "label": "Anne's Pen",
       "summary": "Word processor",
       "id": "io.github.socrtwo.quillpen",
       "assets": {
@@ -28,7 +28,7 @@
     "QuillGrid": {
       "include": true,
       "repo": "QuillGrid",
-      "label": "QuillGrid",
+      "label": "Anne's Grid",
       "summary": "Spreadsheet",
       "id": "io.github.socrtwo.quillgrid",
       "assets": {
@@ -51,10 +51,10 @@
     "QuillPost": {
       "include": true,
       "repo": "QuillPost",
-      "label": "QuillPost",
+      "label": "Anne's Post",
       "summary": "Email, calendar and contacts",
       "id": "info.socrtwo.quillpost",
-      "$comment": "QuillPost is a Kotlin application. Its desktop installers come from Compose Multiplatform (MSI, DMG, DEB) and are built per architecture: Windows x64, macOS Apple silicon, Linux x64 and arm64. Its web edition is a JVM server, and its iOS build is a simulator app, which cannot be installed on a device, so it is not bundled.",
+      "$comment": "Anne's Post is a Kotlin application. Its desktop installers come from Compose Multiplatform (MSI, DMG, DEB) and are built per architecture: Windows x64, macOS Apple silicon, Linux x64 and arm64. Its web edition is a JVM server, and its iOS build is a simulator app, which cannot be installed on a device, so it is not bundled.",
       "assets": {
         "win-x64": "^quillpost-desktop-{tag}-windows-x64\\.msi$",
         "win-portable": "^quillpost-desktop-{tag}-windows-x64-portable\\.zip$",
@@ -68,7 +68,7 @@
     "QuillStage": {
       "include": true,
       "repo": "QuillStage",
-      "label": "QuillStage",
+      "label": "Anne's Stage",
       "summary": "Presentations",
       "id": "io.github.socrtwo.quillstage",
       "assets": {
@@ -91,7 +91,7 @@
     "QuillLoom": {
       "include": false,
       "repo": "QuillLoom",
-      "label": "QuillLoom",
+      "label": "Anne's Loom",
       "$comment": "Not part of the bundle yet. Set include to true and add its asset patterns when it is."
     }
   }

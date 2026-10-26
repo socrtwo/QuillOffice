@@ -1,6 +1,6 @@
 ---
 name: Bundle request
-about: Another platform, package format or option for the QuillOffice installers
+about: Another platform, package format or option for the Anne's Office installers
 title: ''
 labels: enhancement
 assignees: ''
