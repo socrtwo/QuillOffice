@@ -35,7 +35,7 @@ ALT = '|'.join(APPS)
 # A product name is "Quill<App>" as a word of its own: not glued to a path (/ \ ~ . $), not inside a
 # CamelCase identifier or a file-name pattern (QuillPen-1.2.0, QuillPen.app, QuillPenEmbed).
 # `\n`/`\t` written as escape sequences in a string literal still count as a boundary before it.
-PRE = r"(?:(?<=\\n)|(?<=\\t)|(?<=\(/)|(?<![\w/\\~.$@-]))"   # `(/` opens a regex literal
+PRE = r"(?:(?<=\\n)|(?<=\\t)|(?<=\(/)|(?<![\w/\\~.$@`-]))"   # `(/` opens a regex literal; a backtick quotes an identifier
 # A period after the name is a sentence end ("open in QuillGrid.") when whitespace, a closing quote
 # or bracket, or the end of the line follows it; otherwise it starts an extension (QuillPen.app).
 POST = r"(?![\w/\\\-])(?!\.(?![\s\"'`)\]}]|$))"
