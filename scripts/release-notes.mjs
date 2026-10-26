@@ -16,7 +16,7 @@ lines.push(`Anne\'s Office ${version} installs these releases of the Anne\'s Off
 lines.push('| App | Version | Release |', '|---|---|---|');
 for (const [name, a] of Object.entries(m.apps)) {
   if (!a.included) continue;
-  lines.push(a.found ? `| ${name} (${a.summary}) | ${a.version}${a.prerelease ? ' (prerelease)' : ''} | [${a.tag}](${a.url}) |` : `| ${name} | no release found | — |`);
+  lines.push(a.found ? `| ${a.label ?? name} (${a.summary}) | ${a.version}${a.prerelease ? ' (prerelease)' : ''} | [${a.tag}](${a.url}) |` : `| ${a.label ?? name} | no release found | — |`);
 }
 lines.push('', '| Platform | Download |', '|---|---|');
 lines.push(`| Windows 10/11 x64 | ${find(/windows-x64-setup\.exe$/)} — one setup; tick the apps you want |`);

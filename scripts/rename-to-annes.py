@@ -36,7 +36,9 @@ ALT = '|'.join(APPS)
 # CamelCase identifier or a file-name pattern (QuillPen-1.2.0, QuillPen.app, QuillPenEmbed).
 # `\n`/`\t` written as escape sequences in a string literal still count as a boundary before it.
 PRE = r"(?:(?<=\\n)|(?<=\\t)|(?<=\(/)|(?<![\w/\\~.$@-]))"   # `(/` opens a regex literal
-POST = r"(?![\w/\\.\-])"
+# A period after the name is a sentence end ("open in QuillGrid.") when whitespace, a closing quote
+# or bracket, or the end of the line follows it; otherwise it starts an extension (QuillPen.app).
+POST = r"(?![\w/\\\-])(?!\.(?![\s\"'`)\]}]|$))"
 NAME = re.compile(PRE + r"Quill(" + ALT + r")" + POST)
 # "QuillPen/QuillGrid/QuillStage" written as a list in prose.
 CHAIN = re.compile(PRE + r"Quill(?:" + ALT + r")(?:/Quill(?:" + ALT + r"))+" + POST)
